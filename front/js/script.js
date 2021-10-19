@@ -14,6 +14,8 @@ function displayProducts(products) {
   titleLink.classList.add("productName");
   titleLink.innerText = products.name;
 
+  gkgkg;
+
   const descriptionLink = document.createElement("p");
   descriptionLink.classList.add("productDescription");
   descriptionLink.innerText = products.description;

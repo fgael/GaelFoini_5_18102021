@@ -12,9 +12,12 @@ async function listenClick(product) {
   let orderSelection = document.getElementById("addToCart");
   orderSelection.addEventListener("click", function () {
     let productChoosen = new productClass(
+      product._id,
       product.name,
       colorChoosen,
-      qtyChoosen
+      qtyChoosen,
+      product.imageUrl,
+      product.price
     );
     if (colorChoosen != "" && qtyChoosen >= 1 && qtyChoosen <= 100) {
       localStorage.setItem(
@@ -29,10 +32,13 @@ async function listenClick(product) {
 }
 
 class productClass {
-  constructor(name, color, qty) {
+  constructor(id, name, color, qty, imgurl, price) {
+    this.id = id;
     this.name = name;
     this.color = color;
     this.qty = qty;
+    this.imgurl = imgurl;
+    this.price = price;
   }
 }
 

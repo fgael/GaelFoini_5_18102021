@@ -1,15 +1,19 @@
-# Kanap #
+<p align="center">
+    <img src="images/logo.svg" alt="Logo">
 
-This is the front end and back end server for Project 5 of the Web Developer path.
+  <p align="center">
+    Par Gaël Foini
+    <br>
+  </p>
 
-### Back end Prerequisites ###
+## À propos
 
-You will need to have Node and `npm` installed locally on your machine.
+Le site Kanap est un projet de création de site e-commerce en JavaScript, produit par Gaël Foini pour la formation de développeur web chez OpenClassrooms.
 
-### Back end Installation ###
+### Développer avec
 
-Clone this repo. From the "back" folder of the project, run `npm install`. You 
-can then run the server with `node server`. 
-The server should run on `localhost` with default port `3000`. If the
-server runs on another port for any reason, this is printed to the
-console when the server starts, e.g. `Listening on port 3001`.
+Liste de tous les languages utilisés pour la création du site :
+
+- [JS](https://developer.mozilla.org/fr/docs/Web/javascript)
+
+Lien du projet : [https://github.com/fgael/GaelFoini_5_18102021]

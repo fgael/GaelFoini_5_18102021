@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="front/images/logo.png" alt="Logo">
+    <img src="front/images/logo.png" alt="Logo" width="200" height="200">
 
   <p align="center">
     Par Gaël Foini

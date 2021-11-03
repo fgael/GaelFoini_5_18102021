@@ -8,7 +8,7 @@
 
 ## À propos
 
-Le site Kanap est un projet de création de site e-commerce en JavaScript, produit par Gaël Foini pour la formation de développeur web chez OpenClassrooms.
+Le site Kanap est un projet création de la partie front javascript d'un site e-commerce en JavaScript, produit par Gaël Foini pour la formation de développeur web chez OpenClassrooms.
 
 ### Développer avec
 

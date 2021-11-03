@@ -1,3 +1,9 @@
+/**
+ *
+ * @param {*} product
+ */
+// fonction ecoute et envoie au localstorage
+// recuperation couleur, quantite, et ecoute ajout au panier
 async function listenClick(product) {
   let colorChoosen = "";
   let qtyChoosen = "";
@@ -17,8 +23,10 @@ async function listenClick(product) {
       colorChoosen,
       qtyChoosen,
       product.imageUrl,
-      product.price
+      product.price,
+      product.altTxt
     );
+    // envoi au local storage du produit
     if (colorChoosen != "" && qtyChoosen >= 1 && qtyChoosen <= 100) {
       localStorage.setItem(
         product.name + " " + colorChoosen,
@@ -27,26 +35,36 @@ async function listenClick(product) {
     } else {
       alert("Veuillez renseigner une couleur et une quantité.");
     }
-    console.log(productChoosen);
   });
 }
 
+/**
+ *
+ */
+// création instance de classe produit
 class productClass {
-  constructor(id, name, color, qty, imgurl, price) {
+  constructor(id, name, color, qty, imgurl, price, alt) {
     this.id = id;
     this.name = name;
     this.color = color;
     this.qty = qty;
     this.imgurl = imgurl;
     this.price = price;
+    this.alt = alt;
   }
 }
 
+/**
+ *
+ * @param {*} product
+ */
+// affichage produit
 function displayProduct(product) {
+  // recuperation selecteurs + création attributs
   const parentImg = document.querySelector("div.item__img");
-  const productImg = document.createElement("img"); // creation element img
-  productImg.setAttribute("src", product.imageUrl); // img ajout src
-  productImg.setAttribute("alt", product.altTxt); // img ajout alt
+  const productImg = document.createElement("img");
+  productImg.setAttribute("src", product.imageUrl);
+  productImg.setAttribute("alt", product.altTxt);
   parentImg.appendChild(productImg);
 
   const parentName = document.getElementById("title");
@@ -61,14 +79,21 @@ function displayProduct(product) {
   let parentColor = document.getElementById("colors");
   let colorsList = product.colors;
 
-  for (element of colorsList) {
-    const color = document.createElement("option");
-    color.setAttribute("value", element);
-    color.innerText = element;
-    parentColor.appendChild(color);
+  // Affichage des couleurs (incrémentation suivant nombre de couleur)
+  for (let color of colorsList) {
+    const displayColor = document.createElement("option");
+    displayColor.setAttribute("value", color);
+    displayColor.innerText = color;
+    parentColor.appendChild(displayColor);
   }
 }
 
+/**
+ *
+ * @param {*} productId
+ * @returns
+ */
+// communication API
 async function fetchId(productId) {
   return fetch("http://localhost:3000/api/products/" + productId)
     .then(function (res) {
@@ -81,13 +106,16 @@ async function fetchId(productId) {
     });
 }
 
+/**
+ *
+ */
+//fonction principale
 async function main() {
-  const url = new URL(window.location.href);
-  let productId = url.searchParams.get("id");
+  const url = new URL(window.location.href); // pointage url
+  let productId = url.searchParams.get("id"); // productId = url + id
   let product = await fetchId(productId); // product = reponse API
-  displayProduct(product);
-  listenClick(product);
-  console.log(product);
+  displayProduct(product); // affichage produit
+  listenClick(product); // ecoute du bouton ajouter au panier
 }
 
 main();

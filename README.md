@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="images/logo.png" alt="Logo">
+    <img src="front/images/logo.png" alt="Logo" width="200" height="200">
 
   <p align="center">
     Par Gaël Foini
@@ -8,7 +8,7 @@
 
 ## À propos
 
-Le site Kanap est un projet de création de site e-commerce en JavaScript, produit par Gaël Foini pour la formation de développeur web chez OpenClassrooms.
+Le site Kanap est un projet création de la partie front javascript d'un site e-commerce en JavaScript, produit par Gaël Foini pour la formation de développeur web chez OpenClassrooms.
 
 ### Développer avec
 

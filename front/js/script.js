@@ -1,8 +1,25 @@
 /**
  *
+ * @returns
+ */
+// communication API
+async function fetchProducts() {
+  return fetch("http://localhost:3000/api/products")
+    .then(function (res) {
+      if (res.ok) {
+        return res.json();
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
+/**
+ *
  * @param {*} products
  */
-//affichage des produits
+// affichage des produits
 function displayProducts(products) {
   // recuperation id items
   const domCreation = document.getElementById("items");
@@ -17,23 +34,6 @@ function displayProducts(products) {
           </article>
      </a>`
   );
-}
-
-/**
- *
- * @returns
- */
-// communication API
-async function fetchProducts() {
-  return fetch("http://localhost:3000/api/products")
-    .then(function (res) {
-      if (res.ok) {
-        return res.json();
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
 }
 
 /**

@@ -1,57 +1,19 @@
 /**
  *
- * @param {*} product
+ * @param {*} productId
+ * @returns
  */
-// fonction ecoute et envoie au localstorage
-// recuperation couleur, quantite, et ecoute ajout au panier
-async function listenClick(product) {
-  let colorChoosen = "";
-  let qtyChoosen = "";
-  let colorSelection = document.getElementById("colors");
-  colorSelection.addEventListener("change", function (colorChooseEvent) {
-    colorChoosen = colorChooseEvent.target.value;
-  });
-  let qtySelection = document.getElementById("quantity");
-  qtySelection.addEventListener("input", function (qtyChooseEvent) {
-    qtyChoosen = qtyChooseEvent.target.value;
-  });
-  let orderSelection = document.getElementById("addToCart");
-  orderSelection.addEventListener("click", function () {
-    let productChoosen = new productClass(
-      product._id,
-      product.name,
-      colorChoosen,
-      qtyChoosen,
-      product.imageUrl,
-      product.price,
-      product.altTxt
-    );
-    // envoi au local storage du produit
-    if (colorChoosen != "" && qtyChoosen >= 1 && qtyChoosen <= 100) {
-      localStorage.setItem(
-        product.name + " " + colorChoosen,
-        JSON.stringify(productChoosen)
-      );
-    } else {
-      alert("Veuillez renseigner une couleur et une quantité.");
-    }
-  });
-}
-
-/**
- *
- */
-// création instance de classe produit
-class productClass {
-  constructor(id, name, color, qty, imgurl, price, alt) {
-    this.id = id;
-    this.name = name;
-    this.color = color;
-    this.qty = qty;
-    this.imgurl = imgurl;
-    this.price = price;
-    this.alt = alt;
-  }
+// communication API avec productId
+async function fetchId(productId) {
+  return fetch("http://localhost:3000/api/products/" + productId)
+    .then(function (res) {
+      if (res.ok) {
+        return res.json();
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 }
 
 /**
@@ -88,22 +50,58 @@ function displayProduct(product) {
   }
 }
 
+// création de classe produit
+class productClass {
+  constructor(id, name, color, qty, imgurl, price, alt) {
+    this.id = id;
+    this.name = name;
+    this.color = color;
+    this.qty = qty;
+    this.imgurl = imgurl;
+    this.price = price;
+    this.alt = alt;
+  }
+}
+
 /**
  *
- * @param {*} productId
- * @returns
+ * @param {*} product
  */
-// communication API
-async function fetchId(productId) {
-  return fetch("http://localhost:3000/api/products/" + productId)
-    .then(function (res) {
-      if (res.ok) {
-        return res.json();
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+// fonction ecoute et envoie au localstorage
+// recuperation couleur, quantite, et ecoute ajout au panier
+async function listenClick(product) {
+  let colorChoosen = "";
+  let qtyChoosen = "";
+  let colorSelection = document.getElementById("colors");
+  colorSelection.addEventListener("change", function (colorChooseEvent) {
+    colorChoosen = colorChooseEvent.target.value;
+  });
+  let qtySelection = document.getElementById("quantity");
+  qtySelection.addEventListener("input", function (qtyChooseEvent) {
+    qtyChoosen = qtyChooseEvent.target.value;
+  });
+  let orderSelection = document.getElementById("addToCart");
+  orderSelection.addEventListener("click", function () {
+    // création instance productClass
+    let productChoosen = new productClass(
+      product._id,
+      product.name,
+      colorChoosen,
+      qtyChoosen,
+      product.imageUrl,
+      product.price,
+      product.altTxt
+    );
+    // envoi au local storage du produit
+    if (colorChoosen != "" && qtyChoosen >= 1 && qtyChoosen <= 100) {
+      localStorage.setItem(
+        product.name + " " + colorChoosen,
+        JSON.stringify(productChoosen)
+      );
+    } else {
+      alert("Veuillez renseigner une couleur et une quantité entre 1 et 100.");
+    }
+  });
 }
 
 /**

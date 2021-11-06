@@ -72,16 +72,28 @@ class productClass {
 async function listenClick(product) {
   let colorChoosen = "";
   let qtyChoosen = "";
+  let qty = "";
   let colorSelection = document.getElementById("colors");
   colorSelection.addEventListener("change", function (colorChooseEvent) {
     colorChoosen = colorChooseEvent.target.value;
   });
   let qtySelection = document.getElementById("quantity");
   qtySelection.addEventListener("input", function (qtyChooseEvent) {
-    qtyChoosen = qtyChooseEvent.target.value;
+    qty = qtyChooseEvent.target.value;
   });
   let orderSelection = document.getElementById("addToCart");
   orderSelection.addEventListener("click", function () {
+    // incrémentation quantité dans localstorage si element identique dans localstorage
+    let array = [];
+    let oldQty = 0;
+    for (let i = 0; i < localStorage.length; i++) {
+      array[i] = JSON.parse(localStorage.getItem(localStorage.key(i)));
+      if (product._id === array[i].id && array[i].color === colorChoosen) {
+        oldQty = array[i].qty;
+      }
+    }
+    // calcul de la nouvel quantité en prenant compte l'ancienne
+    qtyChoosen = parseInt(oldQty) + parseInt(qty);
     // création instance productClass
     let productChoosen = new productClass(
       product._id,
